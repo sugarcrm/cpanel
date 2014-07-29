@@ -24,16 +24,9 @@
     <div class="header">Sign In</div>
     <form action="{{ route('cpanel.login') }}" method="post">
         <div class="body bg-gray">
-            @if (  Session::has('login_error') )
-            <div class="alert alert-danger">
-                {{ Session::get('login_error') }}
-            </div>
-            @endif
-            @if (  Session::has('success') )
-            <div class="alert alert-success">
-                {{ Session::get('success') }}
-            </div>
-            @endif
+
+            @include('cpanel::partials.errors')
+
             <div class="form-group">
                 <input type="text" name="login_attribute" class="form-control" placeholder="{{{ ucfirst($login_attribute) }}}"/>
             </div>

@@ -45,12 +45,27 @@ class CpanelServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+        $this->registerCpanelFacade();
         $this->registerCommands();
         $this->registerPermission();
         $this->registerGroup();
         $this->registerUser();
         $this->registerPassword();
 	}
+
+    /**
+     * Register the facade
+     *
+     * @author Steve Montambeault <http://stevemo.ca>
+     *
+     */
+    public function registerCpanelFacade()
+    {
+        $this->app->bindShared('cpanel', function()
+        {
+            return $this->app->make('Stevemo\Cpanel\CpanelUtilities');
+        });
+    }
 
      /**
      * Register console commands cpanel:install
@@ -184,7 +199,8 @@ class CpanelServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array('cpanel');
+		return ['cpanel'];
 	}
+
 
 }
