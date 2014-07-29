@@ -35,7 +35,7 @@
                 <input type="password" name="password" class="form-control" placeholder="Password"/>
             </div>
             <div class="form-group">
-                <input type="checkbox" name="remember_me" value="true"/> Remember me
+                <input type="checkbox" name="remember" value="true"/> Remember me
             </div>
         </div>
         <div class="footer">

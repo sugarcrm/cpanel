@@ -32,7 +32,7 @@ class RegistrationController extends BaseController {
     {
         try
         {
-            $this->execute(Config::get('cpanel::commands.register_user'));
+            $this->execute(Config::get('cpanel::commands.register'));
 
             Flash::success(Lang::get('cpanel::users.register_success'));
             return Redirect::route('cpanel.login');

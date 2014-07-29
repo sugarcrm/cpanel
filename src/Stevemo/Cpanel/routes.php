@@ -302,3 +302,9 @@ Route::filter('auth.cpanel', function($route, $request, $userRule = null)
     }
 
 });
+
+// TODO-Stevemo: remove me only for debugging
+Event::listen('Stevemo.Cpanel.Events.*', function($event)
+{
+    Log::info(json_encode($event));
+});

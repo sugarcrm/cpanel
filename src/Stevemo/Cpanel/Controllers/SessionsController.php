@@ -1,6 +1,5 @@
 <?php  namespace Stevemo\Cpanel\Controllers;
 
-use Cpanel;
 use Flash;
 use Sentry;
 use Stevemo\Cpanel\Exceptions\LoginException;
@@ -30,16 +29,15 @@ class SessionsController extends BaseController {
      */
     public function store()
     {
-        $remember = Input::get('remember_me', false);
-        $credentials = [
-            Config::get('cartalyst/sentry::users.login_attribute') => Input::get('login_attribute'),
-            'password' => Input::get('password')
-        ];
-
         try
         {
-            Cpanel::authenticate($credentials,$remember);
+            $formData = Input::only('login_attribute','password');
+            $formData['remember'] = Input::get('remember', false);
+
+            $this->execute(Config::get('cpanel::commands.login'),$formData);
+
             Flash::message( Lang::get('cpanel::users.login_success') );
+
             return Redirect::intended(Config::get('cpanel::prefix', 'admin'));
         }
         catch (LoginException $e)
@@ -59,7 +57,7 @@ class SessionsController extends BaseController {
     {
         $data['user'] = Sentry::getUser();
 
-        $this->execute(Config::get('cpanel::commands.logout_user'), $data);
+        $this->execute(Config::get('cpanel::commands.logout'), $data);
 
         Flash::success(Lang::get('cpanel::users.logout'));
 
