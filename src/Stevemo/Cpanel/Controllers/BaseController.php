@@ -17,11 +17,12 @@ class BaseController extends \Controller {
         {
             $this->layout = View::make($this->layout);
         }
+
         //share the config option to all the views
         $cpanel = Config::get('cpanel::site_config',[]);
         $cpanel['prefix'] = Config::get('cpanel::prefix','');
         View::share('cpanel', $cpanel);
-        View::share('cpanelUser', Cpanel::getUser());
+        View::share('currentUser', Cpanel::getUser());
     }
 
     /**

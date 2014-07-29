@@ -43,7 +43,7 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="glyphicon glyphicon-user"></i>
-                        <span>{{ $cpanelUser->first_name }}&nbsp;{{ $cpanelUser->last_name }}
+                        <span>{{ $currentUser->first_name }}&nbsp;{{ $currentUser->last_name }}
                             <i class="caret"></i>
                         </span>
                     </a>
@@ -52,8 +52,8 @@
                         <li class="user-header bg-light-blue">
                             <img src="{{asset('packages/stevemo/cpanel/adminlte/img/user.jpg')}}" class="img-circle" alt="User Image" />
                             <p>
-                                {{ $cpanelUser->first_name }}&nbsp;{{ $cpanelUser->last_name }}
-                                <small>Member since {{ $cpanelUser->created_at->format('M. Y') }}</small>
+                                {{ $currentUser->first_name }}&nbsp;{{ $currentUser->last_name }}
+                                <small>Member since {{ $currentUser->created_at->format('M. Y') }}</small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -61,7 +61,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{route('cpanel.users.show',array(Sentry::getUser()->id))}}" class="btn btn-default btn-flat">Profile</a>
+                                <a href="{{route('cpanel.users.show',[$currentUser->id])}}" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
                                 <a href="{{route('cpanel.logout')}}" class="btn btn-default btn-flat">Sign out</a>
@@ -86,7 +86,7 @@
                     <img src="{{asset('packages/stevemo/cpanel/adminlte/img/user.jpg')}}" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
-                    <p>Hello, {{ $cpanelUser->first_name }}</p>
+                    <p>Hello, {{ $currentUser->first_name }}</p>
                 </div>
             </div>
 
