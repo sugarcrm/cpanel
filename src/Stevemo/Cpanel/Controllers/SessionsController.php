@@ -46,4 +46,18 @@ class SessionsController extends BaseController {
             return Redirect::back()->withInput()->withErrors($e->getMessage());
         }
     }
+
+    /**
+     * Logout the current user
+     *
+     * @author Steve Montambeault <http://stevemo.ca>
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy()
+    {
+        Cpanel::logout();
+        Flash::success(Lang::get('cpanel::users.logout'));
+        return Redirect::to('/');
+    }
 } 

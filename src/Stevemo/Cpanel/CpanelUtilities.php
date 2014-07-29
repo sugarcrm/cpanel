@@ -86,6 +86,19 @@ class CpanelUtilities {
     }
 
     /**
+     * Logout the current user
+     *
+     * @author Steve Montambeault <http://stevemo.ca>
+     *
+     */
+    public function logout()
+    {
+        $user = $this->getSentry()->getUser();
+        $this->getSentry()->logout();
+        $this->event->fire('cpanel.user.logout',[$user]);
+    }
+
+    /**
      * get a instance of Sentry
      *
      * @author Steve Montambeault <http://stevemo.ca>

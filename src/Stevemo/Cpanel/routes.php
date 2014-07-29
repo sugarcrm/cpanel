@@ -201,7 +201,7 @@ Route::group(array('prefix' => Config::get('cpanel::prefix', 'admin')), function
 
     Route::get('logout', array(
         'as'   => 'cpanel.logout',
-        'uses' => 'Stevemo\Cpanel\Controllers\CpanelController@getLogout'
+        'uses' => 'Stevemo\Cpanel\Controllers\SessionsController@destroy'
     ));
 
     Route::get('register', array(
