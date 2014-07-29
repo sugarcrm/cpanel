@@ -41,19 +41,6 @@ class CpanelController extends BaseController {
         return View::make('cpanel::dashboard.index');
     }
 
-    /**
-     * Show the login form
-     *
-     * @author Steve Montambeault
-     * @link   http://stevemo.ca
-     *
-     * @return \Illuminate\View\View
-     */
-    public function getLogin()
-    {
-        $login_attribute = Config::get('cartalyst/sentry::users.login_attribute');
-        return View::make('cpanel::dashboard.login', compact('login_attribute'));
-    }
 
     /**
      * Display the registration form
@@ -67,51 +54,6 @@ class CpanelController extends BaseController {
     {
         $login_attribute = Config::get('cartalyst/sentry::users.login_attribute');
         return View::make('cpanel::dashboard.register', compact('login_attribute'));
-    }
-
-    /**
-     * Logs out the current user
-     *
-     * @author Steve Montambeault
-     * @link   http://stevemo.ca
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function getLogout()
-    {
-        $this->users->logout();
-        return Redirect::route('cpanel.login')
-            ->with('success', Lang::get('cpanel::users.logout'));
-    }
-
-    /**
-     * Authenticate the user
-     *
-     * @author Steve Montambeault
-     * @link   http://stevemo.ca
-     *
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postLogin()
-    {
-        $remember = Input::get('remember_me', false);
-        $userdata = array(
-            Config::get('cartalyst/sentry::users.login_attribute') => Input::get('login_attribute'),
-            'password' => Input::get('password')
-        );
-
-        if ( $this->userForm->login($userdata,$remember) )
-        {
-            return Redirect::intended(Config::get('cpanel::prefix', 'admin'))
-                ->with('success', Lang::get('cpanel::users.login_success'));
-        }
-
-        return Redirect::back()
-            ->withInput()
-            ->with('login_error',$this->userForm->getErrors()->first());
-
-
     }
 
     /**
