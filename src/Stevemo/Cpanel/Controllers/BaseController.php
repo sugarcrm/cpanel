@@ -1,10 +1,10 @@
 <?php namespace Stevemo\Cpanel\Controllers;
 
-use Controller;
+use Cpanel;
 use View;
 use Config;
 
-class BaseController extends Controller {
+class BaseController extends \Controller {
 
     /**
      * Setup the layout used by the controller.
@@ -18,9 +18,10 @@ class BaseController extends Controller {
             $this->layout = View::make($this->layout);
         }
         //share the config option to all the views
-        $cpanel = Config::get('cpanel::site_config',array());
+        $cpanel = Config::get('cpanel::site_config',[]);
         $cpanel['prefix'] = Config::get('cpanel::prefix','');
         View::share('cpanel', $cpanel);
+        View::share('cpanelUser', Cpanel::getUser());
     }
 
     /**
@@ -33,8 +34,9 @@ class BaseController extends Controller {
      * @param  array $inputs
      * @return Object
      */
-    protected function getValidationService($service, array $inputs = array())
+    protected function getValidationService($service, array $inputs = [])
     {
+        // TODO-Stevemo: remove this !!!!
         $class = '\\'.ltrim(Config::get("cpanel::validation.{$service}"), '\\');
         return new $class($inputs);
     }

@@ -99,6 +99,18 @@ class CpanelUtilities {
     }
 
     /**
+     * Get the currently authenticated user.
+     *
+     * @author Steve Montambeault <http://stevemo.ca>
+     *
+     * @return \Cartalyst\Sentry\Users\UserInterface|null
+     */
+    public function getUser()
+    {
+        return $this->getSentry()->getUser();
+    }
+
+    /**
      * get a instance of Sentry
      *
      * @author Steve Montambeault <http://stevemo.ca>

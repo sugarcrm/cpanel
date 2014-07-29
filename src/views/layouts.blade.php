@@ -43,15 +43,17 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="glyphicon glyphicon-user"></i>
-                        <span>{{ Sentry::getUser()->first_name }} {{ Sentry::getUser()->last_name }} <i class="caret"></i></span>
+                        <span>{{ $cpanelUser->first_name }}&nbsp;{{ $cpanelUser->last_name }}
+                            <i class="caret"></i>
+                        </span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header bg-light-blue">
                             <img src="{{asset('packages/stevemo/cpanel/adminlte/img/user.jpg')}}" class="img-circle" alt="User Image" />
                             <p>
-                                {{ Sentry::getUser()->first_name }} {{ Sentry::getUser()->last_name }}
-                                <small>Member since {{ Sentry::getUser()->created_at->format('M. Y') }}</small>
+                                {{ $cpanelUser->first_name }}&nbsp;{{ $cpanelUser->last_name }}
+                                <small>Member since {{ $cpanelUser->created_at->format('M. Y') }}</small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -84,7 +86,7 @@
                     <img src="{{asset('packages/stevemo/cpanel/adminlte/img/user.jpg')}}" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
-                    <p>Hello, {{ Sentry::getUser()->first_name }}</p>
+                    <p>Hello, {{ $cpanelUser->first_name }}</p>
                 </div>
             </div>
 
