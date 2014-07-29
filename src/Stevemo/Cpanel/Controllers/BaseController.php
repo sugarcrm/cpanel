@@ -1,10 +1,13 @@
 <?php namespace Stevemo\Cpanel\Controllers;
 
 use Cpanel;
+use Laracasts\Commander\CommanderTrait;
 use View;
 use Config;
 
 class BaseController extends \Controller {
+
+    use CommanderTrait;
 
     /**
      * Setup the layout used by the controller.

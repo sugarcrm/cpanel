@@ -15,6 +15,7 @@ return array(
     ),
 
     'commands' => array(
+        'logout_user' => 'Stevemo\Cpanel\Sessions\UseCases\LogoutUserCommand',
         'register_user' => 'Stevemo\Cpanel\Registration\UseCases\RegisterUserCommand',
     ),
 );

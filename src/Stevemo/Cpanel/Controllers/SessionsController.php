@@ -2,6 +2,7 @@
 
 use Cpanel;
 use Flash;
+use Sentry;
 use Stevemo\Cpanel\Exceptions\LoginException;
 use View, Config, Input, Redirect, Lang;
 
@@ -56,8 +57,12 @@ class SessionsController extends BaseController {
      */
     public function destroy()
     {
-        Cpanel::logout();
+        $data['user'] = Sentry::getUser();
+
+        $this->execute(Config::get('cpanel::commands.logout_user'), $data);
+
         Flash::success(Lang::get('cpanel::users.logout'));
+
         return Redirect::to('/');
     }
 } 
