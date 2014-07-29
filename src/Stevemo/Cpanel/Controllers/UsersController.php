@@ -58,22 +58,9 @@ class UsersController extends BaseController {
      */
     public function create()
     {
-        $user = $this->users->getEmptyUser();
+        $groups = Sentry::findAllGroups();
 
-        $userPermissions = array();
-        $genericPermissions = $this->permissions->generic();
-        $modulePermissions = $this->permissions->module();
-
-
-        //Get Groups
-        $groups = $this->groups->findAll();
-
-        return View::make('cpanel::users.create')
-            ->with('user',$user)
-            ->with('userPermissions',$userPermissions)
-            ->with('genericPermissions',$genericPermissions)
-            ->with('modulePermissions',$modulePermissions)
-            ->with('groups',$groups);
+        return View::make('cpanel::users.create',compact('groups'));
     }
 
     /**

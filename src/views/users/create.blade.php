@@ -16,121 +16,78 @@
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12">
-            <?php
-            $option = array(
-                'route' => 'cpanel.users.store',
-                'class' => 'form-horizontal'
-            );
-            ?>
-            {{ Form::open($option) }}
+<div class="row">
+    <div class="col-md-7 col-lg-offset-2">
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Create a new user</h3>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Create a new user</h3>
+            </div>
+            <div class="panel-body">
+                {{ Form::open(['route' => 'cpanel.users.store']) }}
+
+                <!-- First Name field -->
+                <div class="form-group">
+                    {{ Form::label('first_name','First Name') }}
+                    {{ Form::text('first_name',null,['class'=>'form-control']) }}
                 </div>
-                <div class="panel-body">
-                    <div class="tabbable">
 
-                        <ul class="nav nav-tabs" id="myTab">
-                            <li class="active">
-                                <a href="#credentials" data-toggle="tab">User Credentials</a>
-                            </li>
-                            <li>
-                                <a href="#permissions" data-toggle="tab">User Permissions</a>
-                            </li>
-                        </ul>
+                <!-- Last Name field -->
+                <div class="form-group">
+                    {{ Form::label('last_name','Last Name') }}
+                    {{ Form::text('last_name',null,['class'=>'form-control']) }}
+                </div>
 
-                        <div class="tab-content">
+                <!-- Email field -->
+                <div class="form-group">
+                    {{ Form::label('email','Email') }}
+                    {{ Form::email('email',null,['class'=>'form-control']) }}
+                </div>
 
-                            <div class="tab-pane active" id="credentials">
-                                <legend class="margin-top-10">User Informations</legend>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="first_name">First Name</label>
-                                    <div class="col-md-4">
-                                        {{ Form::text('first_name',null,array('class'=>'form-control','placeholder'=>'First Name')) }}
-                                    </div>
-                                </div>
+                <!-- Password field -->
+                <div class="form-group">
+                    {{ Form::label('password','Password') }}
+                    {{ Form::password('password',['class'=>'form-control']) }}
+                </div>
 
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="last_name">Last Name</label>
-                                    <div class="col-md-4">
-                                        {{ Form::text('last_name',null,array('class'=>'form-control','placeholder'=>'Last Name')) }}
-                                    </div>
-                                </div>
+                <!-- Password Confirmation field -->
+                <div class="form-group">
+                    {{ Form::label('password_confirmation','Confirm password') }}
+                    {{ Form::password('password_confirmation',['class'=>'form-control']) }}
+                </div>
 
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="email">Email</label>
-                                    <div class="col-md-4">
-                                        {{ Form::email('email',null,array('class'=>'form-control','placeholder'=>'Email')) }}
-                                    </div>
-                                </div>
+                <div class="form-group">
+                    <label for="groups">Groups</label>
+                    <select id="groups" name="groups" class="select2 form-control" multiple="true">
+                        @foreach($groups as $group)
+                            <option value="{{ $group->id }}">{{ $group->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-                                <legend>Password</legend>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="password">Password</label>
-                                    <div class="col-md-4">
-                                        {{ Form::password('password',array('class'=>'form-control','placeholder'=>'Password')) }}
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="password_confirmation">Confirm Password</label>
-                                    <div class="col-md-4">
-                                        {{ Form::password('password_confirmation',array('class'=>'form-control','placeholder'=>'Confirm Password')) }}
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="groups[]" class="col-sm-2 control-label">Groups</label>
-                                    <div class="col-md-4">
-                                        <select id="groups" name="groups[]" class="select2 form-control" multiple="true">
-                                            @foreach($groups as $group)
-                                            @if( in_array( $group->id, Input::old('groups', array())) )
-                                            <option selected="selected" value="{{ $group->id }}">{{ $group->name }}</option>
-                                            @else
-                                            <option value="{{ $group->id }}">{{ $group->name }}</option>
-                                            @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <legend>Options</legend>
-                                <div class="form-group">
-                                    <label for="activate" class="col-sm-2 control-label">Activate</label>
-                                    <div class="col-md-2">
-                                        {{
-                                        Form::select(
-                                        'permissions[superuser]',
-                                        array('0' => 'No','1' => 'Yes'),
-                                        null,
-                                        array('class'=>'select2 form-control'))
-                                        }}
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane" id="permissions">
-                                <p class="lead margin-top-10">Permissions set here will override groups permissions</p>
-                                @include('cpanel::users.permissions_form')
-                            </div>
-
-                        </div>
-
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label for="activate">Activate</label>
+                        {{
+                        Form::select('permissions',['0' => 'No','1' => 'Yes'],
+                        null,['class'=>'select2 form-control'])
+                        }}
                     </div>
                 </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="permissions"> Set this user permissions after save?
+                    </label>
+                </div>
+
+                <!-- Save field -->
+                <div class="form-group">
+                    {{ Form::submit('Save',['class'=>'btn btn-primary']) }}
+                </div>
+                {{Form::close()}}
             </div>
-
-
-
-            {{Form::close()}}
         </div>
     </div>
+</div>
 @stop
