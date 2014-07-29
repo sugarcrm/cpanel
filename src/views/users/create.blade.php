@@ -58,7 +58,7 @@
 
                 <div class="form-group">
                     <label for="groups">Groups</label>
-                    <select id="groups" name="groups" class="select2 form-control" multiple="true">
+                    <select id="groups" name="groups[]" class="select2 form-control" multiple="true">
                         @foreach($groups as $group)
                             <option value="{{ $group->id }}">{{ $group->name }}</option>
                         @endforeach
@@ -69,7 +69,7 @@
                     <div class="col-md-3 form-group">
                         <label for="activate">Activate</label>
                         {{
-                        Form::select('permissions',['0' => 'No','1' => 'Yes'],
+                        Form::select('activate',['0' => 'No','1' => 'Yes'],
                         null,['class'=>'select2 form-control'])
                         }}
                     </div>
@@ -77,7 +77,8 @@
 
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="permissions"> Set this user permissions after save?
+                        {{ Form::hidden('permission',0) }}
+                        {{ Form::checkbox('permission',1) }} &nbsp;Set this user permissions after save?
                     </label>
                 </div>
 

@@ -112,8 +112,9 @@ class UsersController extends BaseController {
      */
     public function store()
     {
+        $this->execute(Config::get('cpanel::commands.create_user'));
         $inputs = Input::except('groups', 'activate');
-        $inputs['groups'] = Input::get('groups', array());
+        $inputs['groups'] = Input::get('groups', []);
         $inputs['activate'] = Input::get('activate', false);
 
         if ( $this->userForm->create($inputs) )

@@ -5,16 +5,16 @@
     <title>{{ $cpanel['title'] }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.1.0 -->
-    {{ HTML::style('packages/stevemo/cpanel/adminlte/css/bootstrap.min.css') }}
+    {{ HTML::style('packages/stevemo/cpanel/AdminLTE/css/bootstrap.min.css') }}
     <!-- font Awesome -->
-    {{ HTML::style('packages/stevemo/cpanel/adminlte/css/font-awesome.min.css') }}
+    {{ HTML::style('packages/stevemo/cpanel/AdminLTE/css/font-awesome.min.css') }}
     <!-- Ionicons -->
-    {{ HTML::style('packages/stevemo/cpanel/adminlte/css/ionicons.min.css') }}
+    {{ HTML::style('packages/stevemo/cpanel/AdminLTE/css/ionicons.min.css') }}
     <!-- Select2 3.4.5-->
-    {{ HTML::style('packages/stevemo/cpanel/adminlte/select2-3.4.5/select2.css') }}
-    {{ HTML::style('packages/stevemo/cpanel/adminlte/select2-3.4.5/select2-bootstrap.css') }}
+    {{ HTML::style('packages/stevemo/cpanel/select2-3.4.5/select2.css') }}
+    {{ HTML::style('packages/stevemo/cpanel/select2-3.4.5/select2-bootstrap.css') }}
     <!-- Theme style -->
-    {{ HTML::style('packages/stevemo/cpanel/adminlte/css/adminlte.css') }}
+    {{ HTML::style('packages/stevemo/cpanel/AdminLTE/css/AdminLTE.css') }}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,7 +50,7 @@
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header bg-light-blue">
-                            <img src="{{asset('packages/stevemo/cpanel/adminlte/img/user.jpg')}}" class="img-circle" alt="User Image" />
+                            <img src="{{asset('packages/stevemo/cpanel/img/user.jpg')}}" class="img-circle" alt="User Image" />
                             <p>
                                 {{ $currentUser->first_name }}&nbsp;{{ $currentUser->last_name }}
                                 <small>Member since {{ $currentUser->created_at->format('M. Y') }}</small>
@@ -83,7 +83,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{asset('packages/stevemo/cpanel/adminlte/img/user.jpg')}}" class="img-circle" alt="User Image" />
+                    <img src="{{asset('packages/stevemo/cpanel/img/user.jpg')}}" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
                     <p>Hello, {{ $currentUser->first_name }}</p>
@@ -147,15 +147,17 @@
 
 
 <!-- jQuery 1.10.2 -->
-{{ HTML::script('packages/stevemo/cpanel/adminlte/js/jquery-1.10.2.js') }}
+{{ HTML::script('packages/stevemo/cpanel/js/jquery.1.10.0.min.js') }}
 <!-- Bootstrap -->
-{{ HTML::script('packages/stevemo/cpanel/adminlte/js/bootstrap.min.js') }}
+{{ HTML::script('packages/stevemo/cpanel/AdminLTE/js/bootstrap.min.js') }}
 <!-- Select2 3.4.5-->
-{{ HTML::script('packages/stevemo/cpanel/adminlte/select2-3.4.5/select2.min.js') }}
+{{ HTML::script('packages/stevemo/cpanel/select2-3.4.5/select2.min.js') }}
 <!-- Bootbox-->
-{{ HTML::script('packages/stevemo/cpanel/adminlte/bootbox/bootbox.min.js') }}
+{{ HTML::script('packages/stevemo/cpanel/js/bootbox.min.js') }}
 <!-- AdminLTE App -->
-{{ HTML::script('packages/stevemo/cpanel/adminlte/js/app.js') }}
+{{ HTML::script('packages/stevemo/cpanel/AdminLTE/js/AdminLTE/app.js') }}
+<!-- Cpanel -->
+{{ HTML::script('packages/stevemo/cpanel/js/admin.js') }}
 
 </body>
 </html>

@@ -18,5 +18,6 @@ return array(
         'login' => 'Stevemo\Cpanel\Sessions\UseCases\LoginUserCommand',
         'logout' => 'Stevemo\Cpanel\Sessions\UseCases\LogoutUserCommand',
         'register' => 'Stevemo\Cpanel\Registration\UseCases\RegisterUserCommand',
+        'create_user' => 'Stevemo\Cpanel\Users\UseCases\CreateUserCommand',
     ),
 );
