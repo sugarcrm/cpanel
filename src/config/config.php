@@ -13,4 +13,8 @@ return array(
         'title'       => 'My Admin Panel',
         'description' => 'Laravel 4 Admin Panel'
     ),
+
+    'commands' => array(
+        'register_user' => 'Stevemo\Cpanel\Registration\UseCases\RegisterUserCommand',
+    ),
 );
