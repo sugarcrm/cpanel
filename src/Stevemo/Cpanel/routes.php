@@ -192,15 +192,17 @@ Route::group(array('prefix' => Config::get('cpanel::prefix', 'admin')), function
     */
     Route::get('login', array(
         'as'   => 'cpanel.login',
-        'uses' => 'Stevemo\Cpanel\Controllers\CpanelController@getLogin'
+        'uses' => 'Stevemo\Cpanel\Controllers\SessionsController@create'
+    ));
+    Route::post('login', array(
+        'as'   => 'cpanel.login',
+        'uses' => 'Stevemo\Cpanel\Controllers\SessionsController@store'
     ));
 
     Route::get('logout', array(
         'as'   => 'cpanel.logout',
         'uses' => 'Stevemo\Cpanel\Controllers\CpanelController@getLogout'
     ));
-
-    Route::post('login','Stevemo\Cpanel\Controllers\CpanelController@postLogin');
 
     Route::get('register', array(
         'as'   => 'cpanel.register',
