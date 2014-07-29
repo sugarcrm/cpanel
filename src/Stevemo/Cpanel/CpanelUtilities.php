@@ -34,56 +34,7 @@ class CpanelUtilities {
         $this->app = $app;
     }
 
-    /**
-     * Attempts to authenticate the given user
-     * according to the passed credentials.
-     *
-     * @author Steve Montambeault <http://stevemo.ca>
-     *
-     * @param array $credentials
-     * @param bool $remember
-     * @throws Exceptions\LoginException
-     *
-     * @return \Cartalyst\Sentry\Users\UserInterface
-     */
-    public function authenticate(array $credentials, $remember = false)
-    {
-        try
-        {
-            $user = $this->getSentry()->authenticate($credentials,$remember);
-            $this->event->fire('cpanel.user.login',[$user]);
-            return $user;
-        }
-        catch (LoginRequiredException $e)
-        {
-            throw new LoginException($e->getMessage());
-        }
-        catch (PasswordRequiredException $e)
-        {
-            throw new LoginException($e->getMessage());
-        }
-        catch (WrongPasswordException $e)
-        {
-            throw new LoginException($e->getMessage());
-        }
-        catch (UserNotActivatedException $e)
-        {
-            throw new LoginException($e->getMessage());
-        }
-        catch (UserNotFoundException $e)
-        {
-            throw new LoginException($e->getMessage());
-        }
-        catch (UserSuspendedException $e)
-        {
-            throw new LoginException($e->getMessage());
-        }
-        catch (UserBannedException $e)
-        {
-            throw new LoginException($e->getMessage());
-        }
 
-    }
 
     /**
      * Get the currently authenticated user.

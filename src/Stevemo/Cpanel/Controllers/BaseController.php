@@ -1,7 +1,7 @@
 <?php namespace Stevemo\Cpanel\Controllers;
 
-use Cpanel;
 use Laracasts\Commander\CommanderTrait;
+use Sentry;
 use View;
 use Config;
 
@@ -25,7 +25,7 @@ class BaseController extends \Controller {
         $cpanel = Config::get('cpanel::site_config',[]);
         $cpanel['prefix'] = Config::get('cpanel::prefix','');
         View::share('cpanel', $cpanel);
-        View::share('currentUser', Cpanel::getUser());
+        View::share('currentUser', Sentry::getUser());
     }
 
     /**
