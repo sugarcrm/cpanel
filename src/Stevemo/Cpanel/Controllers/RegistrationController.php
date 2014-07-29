@@ -3,14 +3,11 @@
 use Config;
 use Flash;
 use Lang;
-use Laracasts\Commander\CommanderTrait;
 use Laracasts\Validation\FormValidationException;
 use Redirect;
 use View;
 
 class RegistrationController extends BaseController {
-
-    use CommanderTrait;
 
     /**
      * Display the registration form
@@ -42,9 +39,7 @@ class RegistrationController extends BaseController {
         }
         catch (FormValidationException $e)
         {
-            return Redirect::back()
-                ->withInput()
-                ->withErrors($e->getErrors());
+            return Redirect::back()->withInput()->withErrors($e->getErrors());
         }
 
     }
