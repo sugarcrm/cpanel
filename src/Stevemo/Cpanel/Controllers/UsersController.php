@@ -1,52 +1,9 @@
 <?php namespace Stevemo\Cpanel\Controllers;
 
 use View, Config, Redirect, Lang, Input;
-use Stevemo\Cpanel\User\Repo\CpanelUserInterface;
-use Stevemo\Cpanel\User\Form\UserFormInterface;
-use Stevemo\Cpanel\Permission\Repo\PermissionInterface;
-use Stevemo\Cpanel\Group\Repo\CpanelGroupInterface;
-use Stevemo\Cpanel\User\Repo\UserNotFoundException;
+use Sentry;
 
 class UsersController extends BaseController {
-
-    /**
-     * @var \Stevemo\Cpanel\User\Repo\CpanelUserInterface
-     */
-    protected $users;
-
-    /**
-     * @var \Stevemo\Cpanel\Permission\Form\PermissionFormInterface
-     */
-    protected $permissions;
-
-    /**
-     * @var \Stevemo\Cpanel\Group\Repo\CpanelGroupInterface
-     */
-    protected $groups;
-
-    /**
-     * @var \Stevemo\Cpanel\User\Form\UserFormInterface
-     */
-    protected $userForm;
-
-    /**
-     * @param \Stevemo\Cpanel\User\Repo\CpanelUserInterface       $users
-     * @param \Stevemo\Cpanel\Permission\Repo\PermissionInterface $permissions
-     * @param \Stevemo\Cpanel\Group\Repo\CpanelGroupInterface     $groups
-     * @param \Stevemo\Cpanel\User\Form\UserFormInterface         $userForm
-     */
-    public function __construct(
-        CpanelUserInterface $users,
-        PermissionInterface $permissions,
-        CpanelGroupInterface $groups,
-        UserFormInterface $userForm
-    )
-    {
-        $this->users = $users;
-        $this->permissions = $permissions;
-        $this->groups = $groups;
-        $this->userForm = $userForm;
-    }
 
     /**
      * Show all the users
@@ -58,9 +15,8 @@ class UsersController extends BaseController {
      */
     public function index()
     {
-        $users = $this->users->findAll();
-        return View::make('cpanel::users.index')
-            ->with('users',$users);
+        $users = Sentry::findAllUsers();
+        return View::make('cpanel::users.index', compact('users'));
     }
 
     /**
