@@ -137,7 +137,7 @@
 
         <!-- Main content -->
         <section class="content">
-            @include('cpanel::partials.alert')
+            @include('flash::message')
             @yield('content')
         </section>
     </aside><!-- /.right-side -->
