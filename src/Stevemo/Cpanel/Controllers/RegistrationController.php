@@ -2,6 +2,7 @@
 
 use Config;
 use Flash;
+use Lang;
 use Laracasts\Commander\CommanderTrait;
 use Laracasts\Validation\FormValidationException;
 use Redirect;

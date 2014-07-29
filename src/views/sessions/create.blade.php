@@ -25,6 +25,7 @@
     <form action="{{ route('cpanel.login') }}" method="post">
         <div class="body bg-gray">
 
+            @include('flash::message')
             @include('cpanel::partials.errors')
 
             <div class="form-group">
