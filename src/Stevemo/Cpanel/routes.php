@@ -206,10 +206,13 @@ Route::group(array('prefix' => Config::get('cpanel::prefix', 'admin')), function
 
     Route::get('register', array(
         'as'   => 'cpanel.register',
-        'uses' => 'Stevemo\Cpanel\Controllers\CpanelController@getRegister'
+        'uses' => 'Stevemo\Cpanel\Controllers\RegistrationController@create'
     ));
 
-    Route::post('register','Stevemo\Cpanel\Controllers\CpanelController@postRegister');
+    Route::post('register', array(
+        'as'   => 'cpanel.register',
+        'uses' => 'Stevemo\Cpanel\Controllers\RegistrationController@store'
+    ));
 
     /*
     |--------------------------------------------------------------------------

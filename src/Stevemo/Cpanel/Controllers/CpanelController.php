@@ -38,22 +38,7 @@ class CpanelController extends BaseController {
      */
     public function index()
     {
-        return View::make('cpanel::dashboard.index');
-    }
-
-
-    /**
-     * Display the registration form
-     *
-     * @author Steve Montambeault
-     * @link   http://stevemo.ca
-     *
-     * @return \Illuminate\View\View
-     */
-    public function getRegister()
-    {
-        $login_attribute = Config::get('cartalyst/sentry::users.login_attribute');
-        return View::make('cpanel::dashboard.register', compact('login_attribute'));
+        return View::make('cpanel::cpanel.index');
     }
 
     /**

@@ -24,15 +24,9 @@
     <div class="header">Register New Membership</div>
     {{Form::open(array('route'=>'cpanel.register'))}}
         <div class="body bg-gray">
-            @if (  Session::has('errors') )
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
+           
+            @include('cpanel::partials.errors')
+            
             <div class="form-group">
                 {{ Form::text('first_name',null,array('class'=>'form-control','placeholder'=>'First Name')) }}
             </div>
