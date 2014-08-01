@@ -1,5 +1,7 @@
 <?php namespace Stevemo\Cpanel\Controllers;
 
+use Flash;
+use Laracasts\Validation\FormValidationException;
 use View, Config, Redirect, Lang, Input;
 use Sentry;
 
@@ -112,20 +114,19 @@ class UsersController extends BaseController {
      */
     public function store()
     {
-        $this->execute(Config::get('cpanel::commands.create_user'));
-        $inputs = Input::except('groups', 'activate');
-        $inputs['groups'] = Input::get('groups', []);
-        $inputs['activate'] = Input::get('activate', false);
-
-        if ( $this->userForm->create($inputs) )
+        try
         {
-            return Redirect::route('cpanel.users.index')
-                ->with('success', Lang::get('cpanel::users.create_success'));
+            $this->execute(Config::get('cpanel::commands.create_user'));
+
+            Flash::success(Lang::get('cpanel::users.create_success'));
+
+            return Redirect::route('cpanel.users.index');
+        }
+        catch (FormValidationException $e)
+        {
+            return Redirect::back()->withInput()->withErrors($e->getErrors());
         }
 
-        return Redirect::back()
-            ->withInput()
-            ->withErrors($this->userForm->getErrors());
     }
 
     /**
@@ -143,7 +144,7 @@ class UsersController extends BaseController {
         try
         {
             $credentials = Input::except('groups');
-            $credentials['groups'] = Input::get('groups', array());
+            $credentials['groups'] = Input::get('groups', []);
             $credentials['id'] = $id;
 
 
