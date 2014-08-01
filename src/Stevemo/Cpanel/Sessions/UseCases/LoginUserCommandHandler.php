@@ -1,5 +1,6 @@
 <?php  namespace Stevemo\Cpanel\Sessions\UseCases; 
 
+use Cartalyst\Sentry\Sentry;
 use Cartalyst\Sentry\Throttling\UserBannedException;
 use Cartalyst\Sentry\Throttling\UserSuspendedException;
 use Cartalyst\Sentry\Users\LoginRequiredException;
@@ -11,23 +12,22 @@ use Laracasts\Commander\CommandHandler;
 use Stevemo\Cpanel\Events\EventableTrait;
 use Stevemo\Cpanel\Events\UserLoggedIn;
 use Stevemo\Cpanel\Exceptions\LoginException;
-use Stevemo\Cpanel\Users\UserRepository;
 
 class LoginUserCommandHandler implements CommandHandler {
 
     use EventableTrait;
 
     /**
-     * @var UserRepository
+     * @var Sentry
      */
-    protected $repo;
+    protected $sentry;
 
     /**
-     * @param UserRepository $repo
+     * @param Sentry $sentry
      */
-    function __construct(UserRepository $repo)
+    function __construct(Sentry $sentry)
     {
-        $this->repo = $repo;
+        $this->sentry = $sentry;
     }
 
     /**
@@ -48,7 +48,7 @@ class LoginUserCommandHandler implements CommandHandler {
                 'password'          => $command->password
             ];
 
-            $user = $this->repo->authenticate($credentials, $command->remember);
+            $user = $this->sentry->authenticate($credentials, $command->remember);
 
             $this->dispatchEvent( new UserLoggedIn($user));
 

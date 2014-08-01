@@ -1,5 +1,6 @@
 <?php  namespace Stevemo\Cpanel\Users\UseCases;
 
+use Cartalyst\Sentry\Sentry;
 use Laracasts\Commander\CommandHandler;
 use Stevemo\Cpanel\Events\EventableTrait;
 use Stevemo\Cpanel\Events\UserCreated;
@@ -15,11 +16,17 @@ class CreateUserCommandHandler implements CommandHandler {
     protected $repo;
 
     /**
+     * @var Sentry
+     */
+    protected $sentry;
+
+    /**
      * @param UserRepository $repo
      */
-    function __construct(UserRepository $repo)
+    function __construct(UserRepository $repo, Sentry $sentry)
     {
         $this->repo = $repo;
+        $this->sentry = $sentry;
     }
 
 
@@ -38,7 +45,7 @@ class CreateUserCommandHandler implements CommandHandler {
             'password'   => $command->password
         ];
 
-        $user = $this->repo->register($credentials,$command->activate);
+        $user = $this->sentry->register($credentials,$command->activate);
 
         $this->assignToGroup($command->groups, $user);
 

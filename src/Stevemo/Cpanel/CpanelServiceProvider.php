@@ -36,6 +36,9 @@ class CpanelServiceProvider extends ServiceProvider {
 	{
 		$this->package('stevemo/cpanel');
         include __DIR__ .'/routes.php';
+
+        //make sentry injectable.
+        $this->app['Cartalyst\Sentry\Sentry'] = $this->app['sentry'];
 	}
 
 	/**

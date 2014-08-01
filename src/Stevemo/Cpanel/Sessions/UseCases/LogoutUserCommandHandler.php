@@ -1,25 +1,25 @@
 <?php  namespace Stevemo\Cpanel\Sessions\UseCases; 
 
+use Cartalyst\Sentry\Sentry;
 use Laracasts\Commander\CommandHandler;
 use Stevemo\Cpanel\Events\EventableTrait;
 use Stevemo\Cpanel\Events\UserLoggedOut;
-use Stevemo\Cpanel\Users\UserRepository;
 
 class LogoutUserCommandHandler implements CommandHandler {
 
     use EventableTrait;
 
     /**
-     * @var UserRepository
+     * @var Sentry
      */
-    protected $repo;
+    protected $sentry;
 
     /**
-     * @param UserRepository $repo
+     * @param Sentry $sentry
      */
-    function __construct(UserRepository $repo)
+    function __construct(Sentry $sentry)
     {
-        $this->repo = $repo;
+        $this->sentry = $sentry;
     }
 
     /**
@@ -30,7 +30,7 @@ class LogoutUserCommandHandler implements CommandHandler {
      */
     public function handle($command)
     {
-        $this->repo->logout();
+        $this->sentry->logout();
         $this->dispatchEvent( new UserLoggedOut($command->user) );
     }
 }

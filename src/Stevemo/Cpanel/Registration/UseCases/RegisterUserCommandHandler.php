@@ -1,27 +1,27 @@
 <?php namespace Stevemo\Cpanel\Registration\UseCases;
 
+use Cartalyst\Sentry\Sentry;
 use Cartalyst\Sentry\Users\UserExistsException;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Validation\FormValidationException;
 use Stevemo\Cpanel\Events\EventableTrait;
 use Stevemo\Cpanel\Events\UserRegistered;
-use Stevemo\Cpanel\Users\UserRepository;
 
 class RegisterUserCommandHandler implements CommandHandler {
 
     use EventableTrait;
 
     /**
-     * @var UserRepository
+     * @var Sentry
      */
-    protected $repo;
+    protected $sentry;
 
     /**
-     * @param UserRepository $repo
+     * @param Sentry $sentry
      */
-    function __construct(UserRepository $repo)
+    function __construct(Sentry $sentry)
     {
-        $this->repo = $repo;
+        $this->sentry = $sentry;
     }
 
 
@@ -43,7 +43,7 @@ class RegisterUserCommandHandler implements CommandHandler {
                 'password'   => $command->password
             ];
 
-            $user = $this->repo->register($credentials);
+            $user = $this->sentry->register($credentials);
 
             $this->dispatchEvent( new UserRegistered($user) );
 
