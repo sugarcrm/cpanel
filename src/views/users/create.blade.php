@@ -75,13 +75,6 @@
                     </div>
                 </div>
 
-                <div class="checkbox">
-                    <label>
-                        {{ Form::hidden('permission',0) }}
-                        {{ Form::checkbox('permission',1) }} &nbsp;Set this user permissions after save?
-                    </label>
-                </div>
-
                 <!-- Save field -->
                 <div class="form-group">
                     {{ Form::submit('Save',['class'=>'btn btn-primary']) }}

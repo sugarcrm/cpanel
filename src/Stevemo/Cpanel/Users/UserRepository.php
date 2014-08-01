@@ -10,11 +10,42 @@ class UserRepository {
     protected $container;
 
     /**
+     * @var \Cartalyst\Sentry\Sentry
+     */
+    protected $sentry;
+
+    /**
      * @param Container $container
      */
     function __construct(Container $container)
     {
         $this->container = $container;
+        $this->sentry = $this->getSentry();
+    }
+
+    /**
+     * Authenticate a user;
+     *
+     * @author Steve Montambeault <http://stevemo.ca>
+     *
+     * @param array $credentials
+     * @param bool $remember
+     * @return \Cartalyst\Sentry\Users\UserInterface
+     */
+    public function authenticate(array $credentials, $remember = false)
+    {
+        return $this->sentry->authenticate($credentials, $remember);
+    }
+
+    /**
+     * Logout the current user
+     *
+     * @author Steve Montambeault <http://stevemo.ca>
+     *
+     */
+    public function logout()
+    {
+        return $this->sentry->logout();
     }
 
     /**
@@ -28,7 +59,7 @@ class UserRepository {
      */
     public function register(array $credentials, $activate = false)
     {
-        return $this->sentry()->register($credentials,$activate);
+        return $this->sentry->register($credentials,$activate);
     }
 
     /**
@@ -42,7 +73,7 @@ class UserRepository {
      */
     public function assignGroupById($groupId, $user)
     {
-        $group = $this->sentry()->findGroupById($groupId);
+        $group = $this->sentry->findGroupById($groupId);
         $user->addGroup($group);
         return $user;
     }
@@ -55,7 +86,7 @@ class UserRepository {
      *
      * @return \Cartalyst\Sentry\Sentry
      */
-    public function sentry()
+    public function getSentry()
     {
         return $this->container->make('sentry');
     }

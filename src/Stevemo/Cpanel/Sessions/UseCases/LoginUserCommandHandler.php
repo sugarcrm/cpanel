@@ -8,14 +8,27 @@ use Cartalyst\Sentry\Users\UserNotActivatedException;
 use Cartalyst\Sentry\Users\UserNotFoundException;
 use Cartalyst\Sentry\Users\WrongPasswordException;
 use Laracasts\Commander\CommandHandler;
-use Sentry;
 use Stevemo\Cpanel\Events\EventableTrait;
 use Stevemo\Cpanel\Events\UserLoggedIn;
 use Stevemo\Cpanel\Exceptions\LoginException;
+use Stevemo\Cpanel\Users\UserRepository;
 
 class LoginUserCommandHandler implements CommandHandler {
 
     use EventableTrait;
+
+    /**
+     * @var UserRepository
+     */
+    protected $repo;
+
+    /**
+     * @param UserRepository $repo
+     */
+    function __construct(UserRepository $repo)
+    {
+        $this->repo = $repo;
+    }
 
     /**
      * Sign in a user
@@ -35,7 +48,7 @@ class LoginUserCommandHandler implements CommandHandler {
                 'password'          => $command->password
             ];
 
-            $user = Sentry::authenticate($credentials, $command->remember);
+            $user = $this->repo->authenticate($credentials, $command->remember);
 
             $this->dispatchEvent( new UserLoggedIn($user));
 
