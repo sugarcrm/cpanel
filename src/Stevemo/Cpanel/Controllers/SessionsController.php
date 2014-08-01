@@ -16,8 +16,8 @@ class SessionsController extends BaseController {
      */
     public function create()
     {
-        $login_attribute = Config::get('cartalyst/sentry::users.login_attribute');
-        return View::make('cpanel::sessions.create', compact('login_attribute'));
+        $loginAttribute = Config::get('cartalyst/sentry::users.login_attribute');
+        return View::make('cpanel::sessions.create', compact('loginAttribute'));
     }
 
     /**
@@ -31,8 +31,8 @@ class SessionsController extends BaseController {
     {
         try
         {
-            $formData = Input::only('login_attribute','password');
-            $formData['remember'] = Input::get('remember', false);
+            $formData = array_add(Input::only('loginAttribute','password'),'remember',Input::get('remember', false));
+            $formData = array_add($formData,'loginName',Config::get('cartalyst/sentry::users.login_attribute'));
 
             $this->execute(Config::get('cpanel::commands.login'),$formData);
 

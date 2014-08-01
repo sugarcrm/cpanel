@@ -2,20 +2,23 @@
 
 class LoginUserCommand {
 
-    public $login_attribute;
+    public $loginAttribute;
     public $password;
     public $remember;
+    public $loginName;
 
     /**
-     * @param $login_attribute
+     * @param $loginAttribute
      * @param $password
      * @param $remember
+     * @param $loginName
      */
-    function __construct($login_attribute, $password, $remember)
+    function __construct($loginAttribute, $password, $remember, $loginName)
     {
-        $this->login_attribute = $login_attribute;
+        $this->loginAttribute = $loginAttribute;
         $this->password = $password;
         $this->remember = $remember;
+        $this->loginName = $loginName;
     }
 
 } 

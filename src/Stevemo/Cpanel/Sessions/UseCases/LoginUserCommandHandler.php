@@ -7,7 +7,6 @@ use Cartalyst\Sentry\Users\PasswordRequiredException;
 use Cartalyst\Sentry\Users\UserNotActivatedException;
 use Cartalyst\Sentry\Users\UserNotFoundException;
 use Cartalyst\Sentry\Users\WrongPasswordException;
-use Config;
 use Laracasts\Commander\CommandHandler;
 use Sentry;
 use Stevemo\Cpanel\Events\EventableTrait;
@@ -32,8 +31,8 @@ class LoginUserCommandHandler implements CommandHandler {
         try
         {
             $credentials = [
-                Config::get('cartalyst/sentry::users.login_attribute') => $command->login_attribute,
-                'password' => $command->password
+                $command->loginName => $command->loginAttribute,
+                'password'          => $command->password
             ];
 
             $user = Sentry::authenticate($credentials, $command->remember);

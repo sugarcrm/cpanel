@@ -29,9 +29,11 @@
             @include('cpanel::partials.errors')
 
             <div class="form-group">
-                <input type="text" name="login_attribute" class="form-control" placeholder="{{{ ucfirst($login_attribute) }}}"/>
+                <label class="sr-only" for="loginAttribute">{{{ ucfirst($loginAttribute) }}}</label>
+                <input type="text" name="loginAttribute" class="form-control" placeholder="{{{ ucfirst($loginAttribute) }}}"/>
             </div>
             <div class="form-group">
+                <label class="sr-only" for="password">Password</label>
                 <input type="password" name="password" class="form-control" placeholder="Password"/>
             </div>
             <div class="form-group">
@@ -39,7 +41,7 @@
             </div>
         </div>
         <div class="footer">
-            <button type="submit" class="btn bg-olive btn-block">Sign me in</button>
+            <button type="submit" class="btn bg-olive btn-block">Sign In</button>
             <p><a href="{{route('cpanel.password.forgot')}}">I forgot my password</a></p>
             <a href="{{route('cpanel.register')}}" class="text-center">Register a new membership</a>
         </div>
