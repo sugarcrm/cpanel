@@ -1,0 +1,5 @@
+suites:
+  cpanel_suite:
+    namespace: Stevemo
+    src_path: src
+    spec_prefix: spec
