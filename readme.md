@@ -21,7 +21,7 @@ Begin by installing this package through Composer. Edit your project's `composer
 ```javascript
 {
     "require": {
-        "stevemo/cpanel": "dev-develop"
+        "stevemo/cpanel": "2.1"
     }
 }
 ```
