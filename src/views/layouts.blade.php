@@ -5,7 +5,7 @@
     <title>{{ $cpanel['title'] }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.1.0 -->
-    {{ HTML::style('packages/stevemo/cpanel/AdminLTE/css/bootstrap.min.css') }}
+    {{ HTML::style('packages/stevemo/cpanel/bootstrap-3.2.0/css/bootstrap.min.css') }}
     <!-- font Awesome -->
     {{ HTML::style('packages/stevemo/cpanel/AdminLTE/css/font-awesome.min.css') }}
     <!-- Ionicons -->
@@ -149,7 +149,7 @@
 <!-- jQuery 1.10.2 -->
 {{ HTML::script('packages/stevemo/cpanel/js/jquery.1.10.0.min.js') }}
 <!-- Bootstrap -->
-{{ HTML::script('packages/stevemo/cpanel/AdminLTE/js/bootstrap.min.js') }}
+{{ HTML::script('packages/stevemo/cpanel/bootstrap-3.2.0/js/bootstrap.min.js') }}
 <!-- Select2 3.4.5-->
 {{ HTML::script('packages/stevemo/cpanel/select2-3.4.5/select2.min.js') }}
 <!-- Bootbox-->

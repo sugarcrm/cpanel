@@ -1,11 +1,25 @@
 <?php namespace Stevemo\Cpanel\Controllers;
 
+use Cartalyst\Sentry\Sentry;
 use Flash;
 use Laracasts\Validation\FormValidationException;
 use View, Config, Redirect, Lang, Input;
-use Sentry;
 
 class UsersController extends BaseController {
+
+    /**
+     * @var
+     */
+    protected $sentry;
+
+    /**
+     * @param Sentry $sentry
+     */
+    function __construct(Sentry $sentry)
+    {
+        $this->sentry = $sentry;
+    }
+
 
     /**
      * Show all the users
@@ -17,7 +31,7 @@ class UsersController extends BaseController {
      */
     public function index()
     {
-        $users = Sentry::findAllUsers();
+        $users = $this->sentry->findAllUsers();
         return View::make('cpanel::users.index', compact('users'));
     }
 
@@ -60,7 +74,7 @@ class UsersController extends BaseController {
      */
     public function create()
     {
-        $groups = Sentry::findAllGroups();
+        $groups = $this->sentry->findAllGroups();
 
         return View::make('cpanel::users.create',compact('groups'));
     }
