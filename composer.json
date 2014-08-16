@@ -11,10 +11,10 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "illuminate/support": "~4",
+        "php": ">=5.3.0",
+        "illuminate/support": "v4.1.*",
         "cartalyst/sentry": "2.1.*",
-        "anahkiasen/former": "3.5.*"
+        "anahkiasen/former": "3.4.*"
     },
     "autoload": {
         "classmap": [
