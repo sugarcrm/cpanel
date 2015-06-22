@@ -3,7 +3,7 @@
 return array(
 
     'logout'                     => 'Logout successful.',
-    'register_success'           => 'Congratulation! You are now registered.',
+    'register_success'           => 'Congratulations! You are now registered.',
     'create_success'             => 'User created.',
     'update_success'             => 'User updated.',
     'login_success'              => 'You are now logged in.',
